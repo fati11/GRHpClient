@@ -1,0 +1,163 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Handassat Sahel</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a routerLink="/home" class="glyphicon glyphicon-home"> Home</a></li>
+      <li class="active"><a routerLink="/nouveau-employe">RechercherEmploye</a></li>
+      <li><a routerLink="/nvConge">Demandes de congés</a></li>
+      <li><a  routerLink="/nvFormation"> Demander de Formation</a></li>
+      <li><a routerLink="/fichePaie">Nouveau Fiche de Paie</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a (click)="logOut()"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container spacer">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Nouveau Employé
+    </div>
+    <div class="panel panel-body">
+      <div class="form-group">
+        <div class="row">
+        <div class="col-md-5">
+          <label class="control-label">Prénom</label>
+          <input type="text" class="form-control"  placeholder="saisir le prénom" [(ngModel)]="employe.prenom"/>
+        </div>
+        <div class="col-md-5">
+          <label class="control-label">Mot de passe</label>
+          <div class="custom-control custom-checkbox">
+            <input type="password" class="form-control" [(ngModel)]="employe.password"/>
+          </div>
+
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <label class="control-label">Nom</label>
+          <input type="text" class="form-control" placeholder="saisir le nom" name="nom" [(ngModel)]="employe.nom"/>
+        </div>
+        <div class="col-md-5">
+          <label class="control-label">Téléphone</label>
+          <input type="text"  class="form-control" placeholder="saisir le numéro de tel" name="telephone" [(ngModel)]="employe.telephone" />
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-5">
+          <label class="control-label">Email</label>
+          <input type="email" class="form-control" placeholder="saisir votre email" [(ngModel)]="employe.email" />
+        </div>
+        <div class="col-md-5">
+          <label class="control-label">Mobile</label>
+          <input type="text" class="form-control"  placeholder="saisir le num de tel mobile" [(ngModel)]="employe.mobile"/>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-md-5">
+          <label class="control-label" >Sexe</label>
+          <br/>
+          <div>
+            <input id="male" type="radio" value="male" [(ngModel)]="employe.sexe">
+            <label class=" radio-inline" for="female">Femme</label>
+            <input id="female" type="radio" value="female" [(ngModel)]="employe.sexe">
+            <label class=" radio-inline" for="male">Homme</label>
+          </div>
+        </div>
+        <div class="col-md-5">
+          <label class="control-label">Adresse</label>
+          <input type="text" class="form-control" placeholder="saisir votre adresse"  [(ngModel)]="employe.adresse" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <label class="control-label">Cin</label>
+          <input type="text" class="form-control" placeholder="saisir le cin" [(ngModel)]="employe.cin" />
+        </div>
+        <div class="col-md-5">
+          <label class="control-label">Ville</label>
+          <input type="text" class="form-control"  placeholder="saisir votre ville" [(ngModel)]="employe.ville"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <label class="control-label">CNSS</label>
+          <input type="text" class="form-control" name="cnss" placeholder="saisir le cnss" [(ngModel)]="employe.cnss"/>
+        </div>
+        <div class="col-md-5">
+          <label class="control-label">Pays</label>
+          <select class="form-control"  [(ngModel)]="employe.pays" >
+            <option value=Maroc>Maroc</option>
+            <option value=Algérie>Algérie</option>
+            <option value=France>France</option>
+            <option value=Italie>Italie</option>
+            <option value=Espagne>Espagne</option>
+            <option value=Turkie>Turkie</option>
+            <option value=Russie>Russie</option>
+            <option value=Egypte>Egypte</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <label class="control-label">Statut matrimoniel</label>
+          <select class="form-control" [(ngModel)]="employe.statutMatrimoniel">
+            <option value=Célébataire>Célébataire</option>
+            <option value=Marié(e)>Marié(e)</option>
+          </select>
+        </div>
+        <div class="col-md-5">
+          <label class="control-label">Date de naissance</label>
+          <input type="date"  class="form-control" placeholder="votre date de naissance"  [(ngModel)]="employe.dateNaissance"/>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <label class="control-label">Enfants</label>
+          <select class=form-control [(ngModel)]="employe.enfants">
+            <option value=0>Zero</option>
+            <option value=1>Un</option>
+            <option value=2>Deux</option>
+            <option value=3>Trois</option>
+            <option value=4>Quatre</option>
+            <option value=5>Cinq</option>
+            <option value=6>Six</option>
+            <option value=7>Sept</option>
+            <option value=8>Huit</option>
+            <option value=9>Neuf</option>
+            <option value=10>Dix</option>
+          </select>
+        </div>
+        <div class="col-md-5">
+          <div *ngIf="currentFileUpload" class="progress">
+            <div class="progress-bar progress-bar-info progress-bar-striped" role="progressbar" attr.aria-valuenow="{{progress.percentage}}"
+                 aria-valuemin="0" aria-valuemax="100" [ngStyle]="{width:progress.percentage+'%'}">
+              {{progress.percentage}}%</div>
+          </div>
+          <label class="btn btn-default">
+            <input #fileInput type="file" (change)="selectFile($event)" [(ngModel)]="employe.photo" [value]="currentFileUpload"/>
+          </label>
+
+          <button class="btn btn-success" [disabled]="!selectedFiles" (click)="fileInput.click()">Upload</button>
+        </div>
+      </div>
+      <br/>
+      <div class="row">
+        <div class="col-md-5">
+          <label class="control-label">Role :</label>
+          <select class=form-control  [(ngModel)]="role.roleName">
+            <option value=user>User</option>
+            <option value=admin>Admin</option>
+          </select>
+        </div>
+
+      </div>
+      <button class="btn btn-primary" (click)="onSave()">save</button>
+      </div>
+    </div>
+  </div>
+</div>

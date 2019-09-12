@@ -1,0 +1,78 @@
+<div id="content" #content>
+  <div class="form-group">
+    <div class="row">
+      <div class="col-md-5">
+        <h3> Handassat Sahel</h3>
+        <br/>
+        <p> 231 rue al sonna</p>
+        <p> Tiznit,85000</p>
+        <br/>
+         Emploi : <b>{{fichePaie.fonction}}</b><br/>
+         Entrée : <b>{{fichePaie.dateEmbauche | date : format : timezone}}</b>
+      </div>
+      <div class="col-md-5">
+        <h2>Bulletin de Paie</h2>
+        Période : {{fichePaie.mois}}
+        <br/>
+        <br/>
+        <br/>
+        <span class="label label-info">
+         <b> {{employe.nom + ' ' + employe.prenom + '              '}}</b><br/>
+        <b>  {{employe.adresse}}</b> <br/>
+         <b>  Tiznit,85000</b>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <table class="table table-striped spacer" >
+      <thead>
+      <tr>
+        <td>Rubriques</td>
+        <td>Nombre/taux</td>
+        <td>Base</td>
+        <td>A payer</td>
+        <td>A retenir</td>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+        <td>Salaire de base</td>
+        <td></td>
+        <td>{{fichePaie.salaireBase}}</td>
+        <td></td>
+        <td>{{fichePaie.salaireBase}}</td>
+      </tr>
+      <tr>
+        <td>Charge Familiale</td>
+        <td>4%</td>
+        <td>{{chargefamiliale}}</td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>Indemnité non imposable</td>
+        <td></td>
+        <td></td>
+        <td>{{fichePaie.montantPrime}}</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td>salaire Brut</td>
+        <td></td>
+        <td>{{fichePaie.salaireBase}}</td>
+        <td>{{salaireTotal}}</td>
+        <td></td>
+      </tr>
+      </tbody>
+    </table>
+    <div class="row">
+      <div class="col-md-5">
+        <h3 class="spaceh3">Net à Payer : {{salaireTotal + 'DH'}}</h3>
+    </div>
+    </div>
+  </div>
+</div>
+<button class="btn btn-primary"  routerLink="fichePaieEmploye" >Retour</button>
+<button class="btn btn-warning" (click)="downloadPdf()">Download</button>
+

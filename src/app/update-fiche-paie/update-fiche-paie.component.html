@@ -1,0 +1,139 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Handassat Sahel</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a routerLink="/home" class="glyphicon glyphicon-home"> Home</a></li>
+      <li><a routerLink="/rechercherEmploye">RechercherEmploye</a></li>
+      <li><a routerLink="/nvConge">Demandes de congés</a></li>
+      <li><a  routerLink="/nvFormation"> Demandes de Formations</a></li>
+      <li class="active"><a routerLink="/newFichePaie">Nouveau Fiche de Paie</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a (click)="logOut()"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container spacer">
+  <div class="panel panel-primary" *ngIf="mode==1">
+    <div class="panel-heading">
+      Générer un bulletin de paie
+    </div>
+    <div class="panel panel-body">
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-5">
+            <label class="control-label">CIN</label>
+                <input type="text" class="form-control" [(ngModel)]="fichePaie.cin" aria-label="Number" >
+          </div>
+          <div class="col-md-5">
+            <label class="control-label">Mois</label>
+            <select class="form-control" [(ngModel)]="fichePaie.mois">
+              <option value=Janvier>Janvier</option>
+              <option value=Février>Février</option>
+              <option value=Mars>Mars</option>
+              <option value=Avril>Avril</option>
+              <option value=Mai>Mai</option>
+              <option value=Juin>Juin</option>
+              <option value=Juillet>Juillet</option>
+              <option value=Aout>Aout</option>
+              <option value=Septembre>Septembre</option>
+              <option value=Octobre>Octobre</option>
+              <option value=Novembre>Novembre</option>
+              <option value=Decembre>Decembre</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">
+            <label class="control-label">Date de début</label>
+            <input type="date" class="form-control" [(ngModel)]="fichePaie.dateDebut"/>
+          </div>
+          <div class="col-md-5">
+            <label class="control-label">Date de Fin</label>
+            <input type="date" name="" class="form-control" [(ngModel)]="fichePaie.dateFin" />
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5">
+            <label class="control-label">Salaire de base</label>
+            <input type="text" class="form-control" placeholder="saisir votre email" [(ngModel)]="fichePaie.salaireBase"/>
+          </div>
+          <div class="col-md-5">
+            <label class="control-label">Situation Familiale</label>
+            <select class="form-control" [(ngModel)]="fichePaie.situationFamiliale">
+              <option value=Célébataire>Célébataire</option>
+              <option value=Marié(e)>Marié(e)</option>
+            </select>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-5">
+            <label class="control-label" >Enfant à charges</label>
+            <select class=form-control [(ngModel)]="fichePaie.EnfantAcharge">
+              <option value=0>Zero</option>
+              <option value=1>Un</option>
+              <option value=2>Deux</option>
+              <option value=3>Trois</option>
+              <option value=4>Quatre</option>
+              <option value=5>Cinq</option>
+              <option value=6>Six</option>
+              <option value=7>Sept</option>
+              <option value=8>Huit</option>
+              <option value=9>Neuf</option>
+              <option value=10>Dix</option>
+            </select>
+            <br/>
+          </div>
+          <div class="col-md-5">
+            <label class="control-label">Taux CIMR</label>
+            <input type="text" class="form-control" placeholder="0" [(ngModel)]="fichePaie.tauxCIMR"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">
+            <label class="control-label">Assurance Maladie</label>
+            <input type="text" class="form-control" placeholder="0" [(ngModel)]="fichePaie.assuranceMaladie"/>
+          </div>
+          <div class="col-md-5">
+            <label class="control-label">Date d'embauche</label>
+            <input type="date" class="form-control" [(ngModel)]="fichePaie.dateEmbauche"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">
+            <label class="control-label">Type prime</label>
+            <select class=form-control [(ngModel)]="fichePaie.typePrime">
+              <option value=PrimeTransport>Prime de transport</option>
+              <option value=PrimeAssiduite>Primes d’assiduité</option>
+              <option value=PrimeNuit>Primes de nuit</option>
+              <option value=PrimeAstreinte>Prime d'astreinte</option>
+              <option value=PrimeRepas>Prime de repas</option>
+            </select>
+          </div>
+          <div class="col-md-5">
+            <label class="control-label">Montant Prime</label>
+            <input type="text" class="form-control" placeholder="saisir le montant de prime" [(ngModel)]="fichePaie.montantPrime"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">
+            <label class="control-label">Fonction</label>
+            <select class=form-control [(ngModel)]="fichePaie.fonction">
+              <label class="control-label">Fonctions</label>
+              <option value=DirecteurGeneral>Directeur Général</option>
+              <option value=Ingénieur>Ingénieur</option>
+              <option value=Secrétaire>Secrétaire</option>
+              <option value=ChefDeProjet>Chef de Projet</option>
+            </select>
+          </div>
+
+        </div>
+        <button class="btn btn-primary" (click)="onUpdate()">update</button>
+      </div>
+    </div>
+  </div>
+</div>

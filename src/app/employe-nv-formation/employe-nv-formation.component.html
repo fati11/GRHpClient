@@ -1,0 +1,70 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Handassat Sahel</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a routerLink="/home" class="glyphicon glyphicon-home">Home</a></li>
+      <li ><a routerLink="/nouveau-employe">Rechercher Employé</a></li>
+      <li><a routerLink="/nvConge">Demandes de congés</a></li>
+      <li class="active"><a  routerLink="/nvFormation">Demandes de formations</a></li>
+      <li><a routerLink="/newFichePaie">Nouveau fiche de paie</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a (click)="logout()"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container spacer" *ngIf="mode==1">
+  <div class="panel panel-primary" >
+    <div class="panel-heading">
+      Gestion des formations :
+    </div>
+    <div class="panel panel-body">
+      <table class="table table-striped">
+        <tr>
+          <th >id</th>
+          <th>Nom / Prenom</th>
+          <th>Email</th>
+          <th>Cin</th>
+          <th>description de formation</th>
+          <th>Date de debut de formation</th>
+          <th>Nombre de jours</th>
+          <th>Lieu</th>
+          <th>Action</th>
+        </tr>
+        <tr *ngFor="let c of pageFormation?.content">
+          <td >{{c.employe.id}}</td>
+          <td>{{c.employe.nom+" "+c.employe.prenom}}</td>
+          <td>{{c.employe.email}}</td>
+          <td>{{c.employe.cin}}</td>
+          <td>{{c.sujetFormation}}</td>
+          <td>{{c.dateDebut | date : format : timezone }}</td>
+          <td>{{c.NbrJours}}</td>
+          <td>{{c.lieu}}</td>
+          <td>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-2">
+                  <button class="btn btn-warning center-block" (click)="onValidate(c)"><span class="glyphicon glyphicon-ok-sign"></span></button> </div>
+                <div class="col-md-2">
+
+                </div>
+                <div class="col-md-2">
+                  <button class="btn btn-danger center-block" (click)="onRefuse()" ><span class="glyphicon glyphicon-remove-sign"></span></button>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <div class="container">
+        <ul class="nav nav-pills">
+          <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages;let i=index">
+            <a class="clickable" (click)="gotoPage(i)">{{i}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

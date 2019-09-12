@@ -1,0 +1,53 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Handassat Sahel</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a routerLink="/homeuser" class="glyphicon glyphicon-home"> Home</a></li>
+      <li><a routerLink="/demanderConge">Demander un Congé</a></li>
+      <li><a routerLink="/ajoutformation">Demander une Formation</a></li>
+      <li  class="active"><a routerLink="/fichePaieEmploye">Mes fiche de paies</a></li>
+      <li><a routerLink="/mesConges">Mes Congés</a></li>
+      <li><a routerLink="/mesFormations">Mes Formations</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a (click)="logOut()"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li class="active" ><a href="#" ><span class="glyphicon glyphicon-log-in"></span> {{employe.nom+' '+employe.prenom}}</a></li>
+    </ul>
+  </div>
+</nav>
+<table class="table table-striped">
+  <tr>
+    <th hidden>id</th>
+    <th>cin</th>
+    <th>Mois </th>
+    <th>date de Début</th>
+    <th>date de fin</th>
+    <th>Salaire de base</th>
+    <th>Action</th>
+  </tr>
+  <tr *ngFor="let c of pageFiche?.content">
+    <td hidden>{{c.id}}</td>
+    <td>{{c.cin}}</td>
+    <td>{{c.mois}}</td>
+    <td>{{c.dateDebut | date : format : timezone}}</td>
+    <td>{{c.dateFin | date : format : timezone}}</td>
+    <td>{{c.salaireBase + 'DH'}}</td>
+    <td>
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-2">
+            <button class="btn btn-warning center-block" (click)="download(c.id)"><span class="glyphicon glyphicon-download-alt"></span></button> </div>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>
+<div class="container">
+  <ul class="nav nav-pills">
+    <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages;let i=index">
+      <a class="clickable" (click)="gotoPage(i)">{{i}}</a>
+    </li>
+  </ul>
+</div>

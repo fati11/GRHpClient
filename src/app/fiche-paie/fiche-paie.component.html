@@ -1,0 +1,166 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Handassat Sahel</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a routerLink="/home" class="glyphicon glyphicon-home"> Home</a></li>
+      <li ><a routerLink="/nouveau-employe">RechercherEmploye</a></li>
+      <li><a routerLink="/nvConge">Demandes de congés</a></li>
+      <li><a  routerLink="/nvFormation"> Demandes de Formation</a></li>
+      <li class="active"><a routerLink="/newFichePaie">Nouveau Fiche de Paie</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a (click)="logOut()"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container spacer">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Générer un bulletin de paie
+    </div>
+    <div class="panel panel-body">
+      <div class="form-group">
+        <form  name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+        <div class="row">
+          <div class="col-md-5">
+            <label class="control-label">CIN</label>
+            <form class="example-form">
+              <mat-form-field class="example-full-width">
+                <input type="text" class="form-control" [(ngModel)]="fichePaie.cin" aria-label="Number" matInput [formControl]="searchTerm" [matAutocomplete]="auto">
+                <div *ngIf="f.submitted && !cin.valid" class="help-block">cin is required</div>
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let item of searchResult" [value]="item">
+                    {{ item }}
+                  </mat-option>
+                </mat-autocomplete>
+              </mat-form-field>
+            </form>
+          </div>
+          <div class="col-md-5">
+            <label class="control-label">Mois</label>
+            <select class="form-control" [(ngModel)]="fichePaie.mois" name="mois" #mois="ngModel" required>
+              <div *ngIf="f.submitted && !mois.valid" class="help-block">mois is required</div>
+              <option value=Janvier>Janvier</option>
+              <option value=Février>Février</option>
+              <option value=Mars>Mars</option>
+              <option value=Avril>Avril</option>
+              <option value=Mai>Mai</option>
+              <option value=Juin>Juin</option>
+              <option value=Juillet>Juillet</option>
+              <option value=Aout>Aout</option>
+              <option value=Septembre>Septembre</option>
+              <option value=Octobre>Octobre</option>
+              <option value=Novembre>Novembre</option>
+              <option value=Decembre>Decembre</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">
+            <label class="control-label">Date de début</label>
+            <input type="date" class="form-control" [(ngModel)]="fichePaie.dateDebut" name="dateDebut" #dateDebut="ngModel" required/>
+            <div *ngIf="f.submitted && !dateDebut.valid" class="help-block">dateDebut is required</div>
+
+          </div>
+          <div class="col-md-5">
+            <label class="control-label">Date de Fin</label>
+            <input type="date" name="" class="form-control" [(ngModel)]="fichePaie.dateFin" name="dateFin" #dateFin="ngModel" required/>
+            <div *ngIf="f.submitted && !dateFin.valid" class="help-block">dateFin is required</div>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5">
+            <label class="control-label">Salaire de base</label>
+            <input type="text" class="form-control" placeholder="saisir votre salaire de base" [(ngModel)]="fichePaie.salaireBase" name="salaireBase" #salaireBase="ngModel" required/>
+            <div *ngIf="f.submitted && !salaireBase.valid" class="help-block">salaire de base is required</div>
+          </div>
+          <div class="col-md-5">
+            <label class="control-label">Situation Familiale</label>
+            <select class="form-control" [(ngModel)]="fichePaie.situationFamiliale" name="situationFamiliale" #situationFamiliale="ngModel" required>
+              <div *ngIf="f.submitted && !situationFamiliale.valid" class="help-block">situation familiale is required</div>
+
+              <option value=Célébataire>Célébataire</option>
+              <option value=Marié(e)>Marié(e)</option>
+            </select>
+          </div>
+        </div>
+        <br/>
+        <div class="row">
+          <div class="col-md-5">
+            <label class="control-label" >Enfant à charges</label>
+            <select class=form-control [(ngModel)]="fichePaie.EnfantAcharge" name="EnfantAcharge" #EnfantAcharge="ngModel" required>
+              <div *ngIf="f.submitted && !EnfantAcharge.valid" class="help-block">EnfantAcharge is required</div>
+
+              <option value=0>Zero</option>
+              <option value=1>Un</option>
+              <option value=2>Deux</option>
+              <option value=3>Trois</option>
+              <option value=4>Quatre</option>
+              <option value=5>Cinq</option>
+              <option value=6>Six</option>
+              <option value=7>Sept</option>
+              <option value=8>Huit</option>
+              <option value=9>Neuf</option>
+              <option value=10>Dix</option>
+            </select>
+            <br/>
+          </div>
+          <div class="col-md-5">
+            <label class="control-label">Taux CIMR</label>
+            <input type="text" class="form-control" placeholder="0" [(ngModel)]="fichePaie.tauxCIMR"/>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-5">
+            <label class="control-label">Assurance Maladie</label>
+            <input type="text" class="form-control" placeholder="0" [(ngModel)]="fichePaie.assuranceMaladie"/>
+            <div *ngIf="f.submitted && !assuranceMaladie.valid" class="help-block">assuranceMaladie is required</div>
+          </div>
+            <div class="col-md-5">
+              <label class="control-label">Date d'embauche</label>
+              <input type="date" class="form-control" [(ngModel)]="fichePaie.dateEmbauche" name="dateEmbauche" #dateEmbauche="ngModel" required/>
+              <div *ngIf="f.submitted && !dateEmbauche.valid" class="help-block">dateEmbauche is required</div>
+            </div>
+          </div>
+      <div class="row">
+          <div class="col-md-5">
+            <label class="control-label">Type prime</label>
+            <select class=form-control [(ngModel)]="fichePaie.typePrime" name="typePrime" #typePrime="ngModel" required>
+              <div *ngIf="f.submitted && !typePrime.valid" class="help-block">typePrime is required</div>
+              <option value=PrimeTransport>Prime de transport</option>
+              <option value=PrimeAssiduite>Primes d’assiduité</option>
+              <option value=PrimeNuit>Primes de nuit</option>
+              <option value=PrimeAstreinte>Prime d'astreinte</option>
+              <option value=PrimeRepas>Prime de repas</option>
+            </select>
+        </div>
+        <div class="col-md-5">
+          <label class="control-label">Montant Prime</label>
+          <input type="text" class="form-control" placeholder="saisir le montant de prime" [(ngModel)]="fichePaie.montantPrime" name="montantPrime" #montantPrime="ngModel" required/>
+          <div *ngIf="f.submitted && !montantPrime.valid" class="help-block">montantPrime is required</div>
+        </div>
+      </div>
+        <div class="row">
+          <div class="col-md-5">
+            <label class="control-label">Fonction</label>
+            <select class=form-control [(ngModel)]="fichePaie.fonction" name="fonction" #fonction="ngModel" required>
+              <div *ngIf="f.submitted && !fonction.valid" class="help-block">fonction is required</div>
+              <label class="control-label">Fonctions</label>
+            <option value=DirecteurGeneral>Directeur Général</option>
+            <option value=Ingénieur>Ingénieur</option>
+            <option value=Secrétaire>Secrétaire</option>
+            <option value=ChefDeProjet>Chef de Projet</option>
+            </select>
+          </div>
+
+        </div>
+        <button class="btn btn-primary" (click)="onSave()">save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

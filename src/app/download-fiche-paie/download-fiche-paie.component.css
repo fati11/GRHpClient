@@ -1,0 +1,13 @@
+.spacer{
+    width: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.spaceh3{
+    margin-left: 15px;
+}
+.navbar-inverse{
+    background-color: #4373a7;
+    border-color: #428bca;
+    border-radius: 0;
+}

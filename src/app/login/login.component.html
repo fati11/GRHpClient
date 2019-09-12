@@ -1,0 +1,28 @@
+<form action="action_page.php" name="form" (ngSubmit)="f.form.valid && checkLogin()" #f="ngForm" novalidate>
+  <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !username.valid }">
+  <div class="imgcontainer">
+    <img src="../../assets/images/avatar.jpg" alt="avatar" class="avatar">
+  </div>
+
+  <div class="container" >
+    <label for="username"><b>Username</b></label>
+    <input  type="text" placeholder="Enter Username" name="username" [(ngModel)]="model.username" #username="ngModel" required />
+    <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+  </div>
+    <div [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+      <div class="container">
+    <label for="password"><b>Password</b></label>
+    <input  type="password" placeholder="Enter Password" name="password" [(ngModel)]="model.password" #password="ngModel" required />
+      <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+    <button type="submit" (click)=checkLogin()>Login</button>
+    </div></div>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me
+    </label>
+  </div>
+  <div class="container" style="background-color:#f1f1f1">
+    <button type="button" class="cancelbtn">Cancel</button>
+    <span class="psw">Forgot <a href="#">password?</a></span>
+    <div *ngIf="error" class="alert alert-danger">{{error}}</div>
+  </div>
+</form>

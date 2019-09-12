@@ -1,0 +1,51 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Handassat Sahel</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a routerLink="/homeuser" class="glyphicon glyphicon-home"> Home</a></li>
+      <li><a routerLink="/demanderConge">Demander un Congé</a></li>
+      <li ><a routerLink="/ajoutformation">Demander une Formation</a></li>
+      <li><a routerLink="/fichePaieEmploye">Mes fiche de paies</a></li>
+      <li><a routerLink="/mesConges">Mes Congés</a></li>
+      <li class="active"><a routerLink="/mesFormations">Mes Formations</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a (click)="logOut()"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li class="active"><a href="#" ><span class="glyphicon glyphicon-log-in"></span> {{employe.nom+' '+employe.prenom}}</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container spacer" *ngIf="mode==1">
+  <div class="panel panel-primary" >
+    <div class="panel-heading">
+      Mes Formations :
+    </div>
+    <div class="panel panel-body">
+      <table class="table table-striped">
+        <tr>
+          <th>Nombre de jours de la formation</th>
+          <th>Date de debut de la formation</th>
+          <th>lieu de la formation</th>
+          <th>sujet de la formation</th>
+          <th>Etat d'acceptation </th>
+        </tr>
+        <tr *ngFor="let c of pageFormation?.content">
+          <td>{{c.NbrJours }}</td>
+          <td>{{c.dateDebut | date : format : timezone}}</td>
+          <td>{{c.lieu}}</td>
+          <td>{{c.sujetFormation}}</td>
+          <td class="coleurJaune">{{c.statut}}</td>
+        </tr>
+      </table>
+      <div class="container">
+        <ul class="nav nav-pills">
+          <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages;let i=index">
+            <a class="clickable" (click)="gotoPage(i)">{{i}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

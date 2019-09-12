@@ -1,0 +1,60 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Handassat Sahel</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a routerLink="/homeuser" class="glyphicon glyphicon-home"> Home</a></li>
+      <li class="active"><a routerLink="/demanderConge">Demander un Congé</a></li>
+      <li><a routerLink="/ajoutformation">Demander une Formation</a></li>
+      <li><a routerLink="/fichePaieEmploye">Mes fiche de paies</a></li>
+      <li><a routerLink="/mesConges">Mes Congés</a></li>
+      <li><a routerLink="/mesFormations">Mes Formations</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a (click)="logOut()"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li class="active"><a href="#" ><span class="glyphicon glyphicon-log-in"></span> {{employe.nom+' '+employe.prenom}}</a></li>
+    </ul>
+  </div>
+</nav>
+<ol class="breadcrumb ">
+    <li class="pull-right"><h3><span class="label label-default couleur">{{heure+':'+minute}}</span></h3></li>
+    <li><h3><span class="label label-default couleur">{{'il vous reste ' + nbrJourRestant +' jours de congés'}}</span></h3></li>
+</ol>
+<div class="container spacer">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Demander un Congé :
+    </div>
+    <div class="panel panel-body">
+      <div class="form-group">
+        <form  name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate>
+            <label class="control-label">Date début de congé</label>
+            <input type="date" class="form-control" name="dateDebutConge" placeholder="saisir la date de début de votre congé" [(ngModel)]="conge.dateDebutConge" #dateDebutConge="ngModel" required/>
+        <div *ngIf="f.submitted && !dateDebutConge.valid" class="help-block">date de debut de conge is required</div>
+        <label class="control-label">Date Fin de congé</label>
+        <input type="date" class="form-control" placeholder="saisir la date de fin de votre congé" name="dateFinConge" [(ngModel)]="conge.dateFinConge" #dateFinConge="ngModel" required />
+        <div *ngIf="f.submitted && !dateFinConge.valid" class="help-block">date de fin de congé is required</div>
+        <label class="control-label">Description de congé</label>
+        <select class="form-control" name="motif" [(ngModel)]="conge.motif" #motif="ngModel" required>
+          <div *ngIf="f.submitted && !motif.valid" class="help-block">motif is required</div>
+          <option value=Maternité>Maternité</option>
+          <option value=Paternité>Paternité</option>
+          <option value=Voyage>Voyage</option>
+          <option value=Maladie>Maladie</option>
+          <option value=CatastropheNaturelle>Catastrophe Naturelle</option>
+          <option value=Formation>Formation</option>
+          <option value=Annuel>Annuel</option>
+          <option value=RaisonFamiliale>Raison Familiale</option>
+        </select>
+        <button class="btn btn-warning center-block" (click)="onSave()"><span class="glyphicon glyphicon-plus"></span>demander le congé </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="show">
+  <div class="alert alert-success cssalert" role="alert">
+    <div class=" glyphicon glyphicon-ok-circle "> votre congé a été enregistré avec succés .</div>
+  </div>
+</div>

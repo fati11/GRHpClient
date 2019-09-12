@@ -8,7 +8,7 @@
     "arrow-parens": false,
     "deprecation": {
       "severity": "warn"
-    },
+    },"eofline": false,
     "import-blacklist": [
       true,
       "rxjs/Rx"

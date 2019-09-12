@@ -1,0 +1,40 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Handassat Sahel</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a  routerLink="/homeuser" class="glyphicon glyphicon-home"> Home</a></li>
+      <li><a routerLink="/demanderConge">Demander un Congé</a></li>
+      <li><a routerLink="/ajoutformation">Demander une Formation</a></li>
+      <li><a routerLink="/fichePaieEmploye">Mes fiche de paies</a></li>
+      <li><a routerLink="/mesConges">Mes Congés</a></li>
+      <li><a routerLink="/mesFormations">Mes Formations</a></li>
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a (click)="logOut()"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+      <li class="active"><a href="#" ><span class="glyphicon glyphicon-log-in"></span> {{employe.nom+' '+employe.prenom}}</a></li>
+    </ul>
+  </div>
+</nav>
+<div *ngIf="show">
+  <div class="alert alert-success" role="alert">
+    <div class="glyphicon glyphicon-ok-circle"> votre congé pris été validé Veuillez consultez vos demandes de congés pour bien vérifier .</div>
+  </div>
+</div>
+  <div *ngIf="!show">
+    <div class="alert alert-danger" role="alert">
+      <h3>votre demande de congé est en cours de traitement.</h3>
+    </div>
+</div>
+<div *ngIf="showFormation">
+  <div class="alert alert-success" role="alert">
+    <div class="glyphicon glyphicon-ok-circle"> votre Formation a été validé Veuillez consultez vos demandes de formations pour bien vérifier .</div>
+  </div>
+</div>
+  <div *ngIf="!showFormation">
+    <div class="alert alert-danger" role="alert">
+      <h3>votre demande est en cours de traitement.</h3>
+    </div>
+</div>

@@ -1,0 +1,81 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Handassat Sahel</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li ><a routerLink="/home" class="glyphicon glyphicon-home"> Home</a></li>
+      <li><a routerLink="/rechercherEmploye">RechercherEmploye</a></li>
+      <li><a routerLink="/nvConge">Demandes de congés</a></li>
+      <li><a  routerLink="/nvFormation"> Demander de Formation</a></li>
+      <li class="active"><a routerLink="/newFichePaie">Nouveau Fiche de Paie</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a (click)="logOut()"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+    </ul>
+  </div>
+</nav>
+<div class="container spacer">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      Les Bulletins de Paies
+    </div>
+    <div class="panel panel-body">
+
+      <div class="form-group">
+        <div class="row">
+          <div class="col-md-5">
+            <input type="nom" class="form-control" placeholder="Nom" [(ngModel)]="motCle"/>
+          </div>
+          <div class="col-md-5">
+            <button class="btn btn-warning" (click)="chercher()"><span class="glyphicon glyphicon-search"></span>  Filter</button>
+          </div>
+          <div class="col-md-5">
+          </div>
+        </div>
+      </div>
+      <table class="table table-striped">
+        <tr>
+          <th hidden>id</th>
+          <th>Nom / Prenom</th>
+          <th>Fonction</th>
+          <th>Mois</th>
+          <th>Salaire de base</th>
+          <th>Action</th>
+        </tr>
+        <tr *ngFor="let c of pageFiche?.content">
+          <td hidden>{{c.id}}</td>
+          <td>{{employe.nom + ' ' + employe.prenom}}</td>
+          <td>{{c.fonction}}</td>
+          <td>{{c.mois}}</td>
+          <td>{{c.salaireBase}}</td>
+          <td>
+            <div class="form-group">
+              <div class="row">
+                <div class="col-md-2">
+                  <button class="btn btn-warning center-block" (click)="onUpdate(c.id)"><span class="glyphicon glyphicon-pencil"></span></button> </div>
+                <div class="col-md-2">
+                  <button class="btn btn-danger center-block" (click)="Download(c.id)"><span class="glyphicon glyphicon-download-alt"></span></button>
+                </div>
+                <div class="col-md-2">
+                  <button class="btn btn-danger center-block" (click)="onDeleteEmploye(c)"><span class="glyphicon glyphicon-trash"></span></button>
+                </div>
+              </div>
+            </div>
+          </td>
+        </tr>
+      </table>
+      <div class="container">
+        <ul class="nav nav-pills">
+          <li [ngClass]="{'active':i==currentPage}" *ngFor="let p of pages;let i=index">
+            <a class="clickable" (click)="gotoPage(i)">{{i}}</a>
+          </li>
+        </ul>
+      </div>
+      <br/>
+      <br/>
+      <button class="btn btn-warning center-block" routerLink="/fichePaie" routerLinkActive="active"><span class="glyphicon glyphicon-plus"></span>Nouveau Bulletin de Paie </button>
+
+    </div>
+  </div>
+</div>
